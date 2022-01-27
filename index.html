@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Separating Axis Theorem Demo</title>
+
+  <script src="libsat.js" defer></script>
+  <script src="webrender.js" defer></script>
+</head>
+<body>
+  <div class="mainDiv">
+    <!-- Canvas -->
+    <div id="canvasDiv">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <!-- Info -->
+    <div id="infoDisplay">
+      <span class="titleText">Separating Axis Theorem</span>
+      <!-- First info panel -->
+      <div id="info1">
+        The separating axis theorem is used to calculate if two convex polygons are touching.<br><br>
+        Imagine shining a light perpendicular to a side on one of the shapes. You can check if the shadows have gaps. If a single gap is present, the shapes are not touching. Otherwise, this process needs to be repeated for all the sides on both polygons to determine that they are touching.<br>
+        <svg viewBox="0 0 300 250">
+          <path
+          style="fill:#330033;fill-opacity:1;stroke:none;stroke-width:22.3191;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+          d="M 0 374.15625 L 0 917.39844 L 485.16211 917.39844 L 364.63281 627.26562 L 559.23438 546.42383 L 586.56445 612.21289 L 764.70703 612.21289 L 675.45703 493.14453 L 764.82422 374.15625 L 0 374.15625 z M 764.70703 612.21289 L 764.82422 612.21289 L 764.82422 612.17578 L 764.70703 612.21289 z "
+          transform="scale(0.26458333)" />
+          <path
+            style="fill:#330033;fill-opacity:1;stroke:none;stroke-width:18.3874;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+            d="M 0,59.216797 V 248.38281 h 224.73047 14.93555 V 59.216797 h -14.93555 z"
+            transform="scale(0.26458333)" />
+          <path
+              style="fill:#cc00cc;fill-opacity:1;stroke:#ff33ff;stroke-width:20.1088;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+              d="m 501.63884,-485.19164 -187.61209,60.85978 -115.85641,-159.62299 116.00888,-159.51222 187.55385,61.03902 z"
+              transform="matrix(0.19736404,0,0,0.19736404,140.38205,245.72929)" />
+          <rect
+              style="fill:#cc00cc;fill-opacity:1;stroke:#ff33ff;stroke-width:3.96875;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+              id="rect973"
+              width="83.124435"
+              height="55.754196"
+              x="-273.40155"
+              y="25.423792"
+              transform="rotate(-112.5592)" />
+          <path
+              style="fill:#cc00cc;fill-opacity:1;stroke:#ff33ff;stroke-width:21.4596;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+              d="m 641.43981,-300.16093 -245.05499,116.81181 21.3655,-270.62976 z"
+              transform="matrix(0.1849406,0,0,0.1849406,-13.847498,99.626739)" />
+          <path
+              style="fill:none;stroke:#000000;stroke-width:10.5833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+              d="m 5.2916665,15.667777 c 0,50.050174 0,50.050174 0,50.050174 v 0" />
+          <path
+              style="fill:none;stroke:#000000;stroke-width:10.5833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+              d="M 5.2916665,98.995504 V 242.72833" />
+        </svg><br> 
+        Drag shapes around using the white circles. They turn green when touching. 
+      </div>
+
+      <!-- Second info panel -->
+      <div id="info2" style="display: none;">
+        Selected: <span id="selectedShapeDisplay">None</span><br>
+        x: <span id="selectedShapeX">0</span><br>
+        y: <span id="selectedShapeY">0</span><br><br>
+        Modify Shape: <br>
+        <!--Sides: <textarea id="sideInput"></textarea><br>-->
+        Width: <textarea id="widthInput"></textarea><br>
+        Height: <textarea id="heightInput"></textarea><br>
+        Rotation: <textarea id="rotationInput" placeholder="deg"></textarea><br>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    body {
+      background-color: rgb(50, 50, 50);
+      color: whitesmoke;
+      user-select: none;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+    textarea {
+      width: 10vw;
+      height: 3vh;
+      font-size: 2vh;
+    }
+    .mainDiv {
+      margin: 0px;
+      font-size: 2.5vh;
+    }
+    .titleText {
+      color: coral;
+      font-size: 4vh;
+    }
+    #canvasDiv {
+      width: 60vw;
+      height: 60vw;
+      border: 2px solid gray;
+      display: inline-block;
+      vertical-align: top;
+    }
+    #infoDisplay {
+      width: 25vw;
+      height: 60vw;
+      display: inline-block;
+      vertical-align: top;
+      border: 2px solid gray;
+      background-color: rgb(20, 20, 20);
+    }
+  </style>
+</body>
+</html>
