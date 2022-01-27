@@ -6,6 +6,6 @@ To run the interactive demo simulation:
 3. Drag and drop the `index.html` into a browser. 
 
 ## Files
-`index.html` is the HTML for the webpage. 
-`webrender.js` controls all the user interaction on the webpage and makes it interactive. 
-`libsat.js` Library for the separating axis theorem. Has the polygon and point classes. Polygon class is used for a polygon created by points and determines if they are hitting. Point class is just an object with property x and y. 
+`index.html` is the HTML for the webpage. <br />
+`webrender.js` controls all the user interaction on the webpage and makes it interactive. <br />
+`libsat.js` Library for the separating axis theorem. Has the polygon and point classes. Polygon class is used for a polygon created by points and determines if they are hitting. Point class is just an object with property x and y. <br />
