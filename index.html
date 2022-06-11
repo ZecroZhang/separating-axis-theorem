@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Separating Axis Theorem Demo</title>
 
+  <script src="icon.js" defer></script> <!-- Loading javascript for the icon... lol -->
   <script src="libsat.js" defer></script>
   <script src="webrender.js" defer></script>
 </head>
@@ -23,7 +24,7 @@
       <div id="info1">
         The separating axis theorem is used to calculate if two convex polygons are touching.<br><br>
         Imagine shining a light perpendicular to a side on one of the shapes. You can check if the shadows have gaps. If a single gap is present, the shapes are not touching. Otherwise, this process needs to be repeated for all the sides on both polygons to determine that they are touching.<br>
-        <svg viewBox="0 0 300 250">
+        <svg id="lightRaysImage" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
           <path
           style="fill:#330033;fill-opacity:1;stroke:none;stroke-width:22.3191;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
           d="M 0 374.15625 L 0 917.39844 L 485.16211 917.39844 L 364.63281 627.26562 L 559.23438 546.42383 L 586.56445 612.21289 L 764.70703 612.21289 L 675.45703 493.14453 L 764.82422 374.15625 L 0 374.15625 z M 764.70703 612.21289 L 764.82422 612.21289 L 764.82422 612.17578 L 764.70703 612.21289 z "
@@ -54,8 +55,8 @@
           <path
               style="fill:none;stroke:#000000;stroke-width:10.5833;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
               d="M 5.2916665,98.995504 V 242.72833" />
-        </svg><br> 
-        Drag shapes around using the white circles. They turn green when touching. 
+        </svg>
+        Drag shapes around using the white circles. The shapes turn green when touching. 
       </div>
 
       <!-- Second info panel -->
@@ -63,11 +64,54 @@
         Selected: <span id="selectedShapeDisplay">None</span><br>
         x: <span id="selectedShapeX">0</span><br>
         y: <span id="selectedShapeY">0</span><br><br>
-        Modify Shape: <br>
-        <!--Sides: <textarea id="sideInput"></textarea><br>-->
-        Width: <textarea id="widthInput"></textarea><br>
-        Height: <textarea id="heightInput"></textarea><br>
-        Rotation: <textarea id="rotationInput" placeholder="deg"></textarea><br>
+
+        <div style="font-weight: bolder;">Modify Shape:</div>
+        
+        <div class="rowItem"><!-- Adjust number of sides. -->
+          <div class="rowLabel">Sides: </div>
+          <textarea id="sideInput"></textarea><br>
+        </div>
+
+        <div id="widthHeightDisplay">
+          <div>
+            <div class="rowLabel">Width: </div>
+
+            <div class="rowItem">
+              <textarea id="widthTextInput" style="width: 10vw;"></textarea>
+              <input type="range" id="widthInput" placeholder="deg" min=20 max=400 style="width: 15vw;"></input>
+            </div>
+          </div>
+
+          <div>
+            <div class="rowLabel">Height: </div>
+
+            <div class="rowItem">
+              <textarea id="heightTextInput" style="width: 10vw;"></textarea>
+              <input type="range" id="heightInput" placeholder="deg" min=20 max=400 style="width: 15vw;"></input>
+            </div>
+          </div>
+          
+          <div id="smallSizeWarning" style="color: red;font-style: italic;display: none;">Entered width and height must be at least 20px.</div>
+
+          <div class="rowItem">
+            <div class="rowLabel">Lock Ratio</div>
+            <input id="lockRatioCheckBox" type="checkbox">
+          </div>
+        </div> 
+
+        <!--<div id="LengthSlider">
+          Length slider: <input type="range">
+        </div>-->
+
+        <div> <!-- Rotation Adjustments -->
+          <div class="rowLabel">Rotation:</div>
+
+          <div class="rowItem">
+            <textarea id="rotationTextInput" style="width: 10vw;"></textarea>
+            <input type="range" id="rotationInput" placeholder="deg" min=0 max=360 style="width: 15vw;"></input>
+          </div>
+        </div>
+      
       </div>
     </div>
   </div>
@@ -75,7 +119,7 @@
   <style>
     body {
       background-color: rgb(50, 50, 50);
-      color: whitesmoke;
+      color: white;
       user-select: none;
     }
     canvas {
@@ -86,6 +130,10 @@
       width: 10vw;
       height: 3vh;
       font-size: 2vh;
+      overflow: hidden;
+      text-overflow: clip;
+      background-color: rgb(50, 50, 50);
+      color: white;
     }
     .mainDiv {
       margin: 0px;
@@ -94,6 +142,13 @@
     .titleText {
       color: coral;
       font-size: 4vh;
+    }
+    .rowItem {
+      display: flex;
+      align-items: center;
+    }
+    .rowLabel {
+      margin-right: 0.5vw;
     }
     #canvasDiv {
       width: 60vw;
